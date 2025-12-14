@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,4 +30,10 @@ Route::get('/articles/detail', function () {
 Route::get('/articles/more', function() {
  return redirect()->route('article.detail');
 });
+
+Route::get('/article', [ArticleController::class, 'showList'])->name('article.list');
+Route::get('/read/{articleId}', [ArticleController::class, 'read'])->name('article.read');
+
+
+
 ?>
