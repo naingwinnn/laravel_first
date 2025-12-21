@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +34,14 @@ Route::get('/articles/more', function() {
 Route::get('/article', [ArticleController::class, 'showList'])->name('article.list');
 Route::get('/read/{articleId}', [ArticleController::class, 'read'])->name('article.read');
 
-
+Route::get('/students', [StudentController::class, 'allStudents']);
+Route::get('/students/find/{id}', [StudentController::class, 'findStudent']);
+Route::get('/students/filter', [StudentController::class, 'filterStudents']);
+Route::get('/students/first', [StudentController::class, 'firstStudent']);
+Route::get('/students/order', [StudentController::class, 'orderStudents']);
+Route::get('/students/pluck', [StudentController::class, 'pluckStudents']);
+Route::get('/students/create', [StudentController::class, 'createStudent']);
+Route::get('/students/update/{id}', [StudentController::class, 'updateStudent']);
+Route::get('/students/delete/{id}', [StudentController::class, 'deleteStudent'])
 
 ?>
