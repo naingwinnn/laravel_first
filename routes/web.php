@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,6 +43,7 @@ Route::get('/students/order', [StudentController::class, 'orderStudents']);
 Route::get('/students/pluck', [StudentController::class, 'pluckStudents']);
 Route::get('/students/create', [StudentController::class, 'createStudent']);
 Route::get('/students/update/{id}', [StudentController::class, 'updateStudent']);
-Route::get('/students/delete/{id}', [StudentController::class, 'deleteStudent'])
+Route::get('/students/delete/{id}', [StudentController::class, 'deleteStudent']);
 
+Route::get('/profile', [UserController::class, 'assignment']);
 ?>

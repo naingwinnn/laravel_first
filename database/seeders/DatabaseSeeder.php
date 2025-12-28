@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\Enrollment;
+use App\Models\Profile;
 
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +24,11 @@ class DatabaseSeeder extends Seeder
     Student::factory(10)->create();
     Course::factory(10)->create();
     Enrollment::factory(10)->create();
-}
+
+    User::factory(10)->create()->each(function ($user) {
+        $user->profile()->create(
+            Profile::factory()->make()->toArray()
+            );
+        });
+    }
 }
