@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Profile;
+use App\Models\Post;
+use App\Models\Comment;
+
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
-     *
-     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -24,20 +24,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * The attributes that should be hidden.
      */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -47,7 +40,40 @@ class User extends Authenticatable
     }
     public function profile()
     {
-    return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class); 
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_user_likes')->withTimestamps();
+    }
+
+    public function latestCommentThroughPost()
+    {
+        return $this->hasOneThrough(
+            Comment::class,
+            Post::class,
+            'user_id', 
+            'post_id',
+            'id', 
+            'id' 
+        )->latestOfMany();
+    }
+
+    public function commentsThroughPosts()
+    {
+        return $this->hasManyThrough(
+            Comment::class,
+            Post::class,
+            'user_id', 
+            'post_id', 
+            'id',      
+            'id'      
+        );
+    }
 }

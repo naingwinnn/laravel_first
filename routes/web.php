@@ -45,5 +45,10 @@ Route::get('/students/create', [StudentController::class, 'createStudent']);
 Route::get('/students/update/{id}', [StudentController::class, 'updateStudent']);
 Route::get('/students/delete/{id}', [StudentController::class, 'deleteStudent']);
 
-Route::get('/profile', [UserController::class, 'assignment']);
+Route::get('/test/one-to-one', [UserController::class, 'oneToOne']);
+Route::get('/test/one-to-many', [UserController::class, 'oneToMany']);
+Route::get('/test/many-to-many', [UserController::class, 'manyToMany']);
+Route::get('/test/has-one-through', [UserController::class, 'hasOneThrough']);
+Route::get('/test/has-many-through', [UserController::class, 'hasManyThrough']);
+
 ?>
