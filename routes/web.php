@@ -17,4 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/admin', function () {
+    return 'Admin Page - Only admin can access';
+})->middleware('check.email');
+
+Route::get('/office', function () {
+    return '✅ Welcome! You are inside office time.';
+})->middleware('office.time');
+
 require __DIR__.'/auth.php';
