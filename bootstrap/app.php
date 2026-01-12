@@ -14,8 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         // alias middleware (route middleware)
         $middleware->alias([
             'check.email' => \App\Http\Middleware\CheckEmail::class,
-        ]);
-        $middleware->alias([
             'office.time' => \App\Http\Middleware\CheckOfficeTime::class,
         ]);
     })
