@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,5 +25,10 @@ Route::get('/admin', function () {
 Route::get('/office', function () {
     return '✅ Welcome! You are inside office time.';
 })->middleware('office.time');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/articles/create', [ArticleController::class, 'create']);
+    Route::post('/articles/store', [ArticleController::class, 'store']);
+});
 
 require __DIR__.'/auth.php';
