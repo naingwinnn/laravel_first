@@ -46,4 +46,35 @@ class ArticleController extends Controller
 
         return redirect('/articles/create')->with('success', 'Article created successfully!');
     }
+    public function index()
+    {
+        $articles = Article::all(); 
+        return view('article.index', compact('articles'));
+    }
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+    public function update(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+
+        $article->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect('/articles');
+    }
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return redirect('/articles');
+    }
+
+
 }
